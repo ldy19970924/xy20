@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- cn.xy.mapper Mapper接口路径 -->
+<mapper namespace="cn.xy.mapper.FaramProductMapper">
+
+
+    <insert id="insertProduct" parameterType="cn.xy.bean.Product">
+        insert  into `product`(
+        `productname`,`productimage`,`producttime`,
+        `productcount`,`productprice`,`origin`,`sid`,`pstate`,`describe`,`cateid`
+        )
+     values (`productname` =#{productname,jdbcType=VARCHAR},`productimage` =#{productimage,jdbcType=VARCHAR},`producttime` = #{producttime,jdbcType=VARCHAR},`productcount` = #{productcount,jdbcType=INTEGER},`productprice` = #{productprice,jdbcType=DOUBLE},
+        `origin` = #{origin,jdbcType=VARCHAR},`sid` = #{sid,jdbcType=INTEGER},`pstate` = #{pstate,jdbcType=INTEGER},`describe` = #{describe,jdbcType=VARCHAR},`cateid` = #{cateid,jdbcType=INTEGER})
+
+    </insert>
+
+    <select id="nameFuzzyQuery" parameterType="string" resultType="cn.xy.bean.Product">
+        select * from `product` where `productname` like '%#{productName,jdbcType=VARCHAR}%'
+    </select>
+
+    <select id="findAll" resultType="cn.xy.bean.Product">
+        select * from `product` where `pstate` = 2
+    </select>
+
+    <delete id="deleteProduct" parameterType="integer">
+        delete from `product` where `productid` = #{productId,jdbcType=INTEGER}
+    </delete>
+
+    <update id="updateProductState">
+        update `product` set `pstate` = 3,`downtime` = #{time} where `productid` = #{id}
+    </update>
+
+    <!--修改的值列表-->
+    <sql id="update_set">
+        <if test="productname !=null and productname != ''">
+            `productname` = #{productname},
+        </if>
+        <if test="productimage !=null and productimage != ''">
+            `productimage` = #{productimage},
+        </if>
+        <if test="productcount !=null and productcount != ''">
+            `productcount` = #{productcount},
+        </if>
+        <if test="productprice !=null and productprice != ''">
+            `productprice` = #{productprice},
+        </if>
+        <if test="origin !=null and origin != ''">
+            `origin` = #{origin},
+        </if>
+        <if test="describe !=null and describe != ''">
+            `describe` = #{describe},
+        </if>
+        <if test="cateid !=null and cateid != ''">
+            `cateid` = #{cateid}
+        </if>
+    </sql>
+
+    <update id="updProduct" parameterType="cn.xy.bean.Product">
+        update `product`
+        <set>
+            <include refid="update_set"/>
+        </set>
+        where `productid` = #{productid,jdbcType=INTEGER};
+    </update>
+</mapper>

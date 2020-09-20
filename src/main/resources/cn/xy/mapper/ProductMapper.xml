@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xy.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="cn.xy.bean.Product">
+    <id column="productid" jdbcType="INTEGER" property="productid" />
+    <result column="productname" jdbcType="VARCHAR" property="productname" />
+    <result column="productimage" jdbcType="VARCHAR" property="productimage" />
+    <result column="producttime" jdbcType="VARCHAR" property="producttime" />
+    <result column="downtime" jdbcType="VARCHAR" property="downtime" />
+    <result column="productcount" jdbcType="INTEGER" property="productcount" />
+    <result column="productprice" jdbcType="DOUBLE" property="productprice" />
+    <result column="origin" jdbcType="VARCHAR" property="origin" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="pstate" jdbcType="INTEGER" property="pstate" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="cateid" jdbcType="INTEGER" property="cateid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    productid, productname, productimage, producttime, downtime, productcount, productprice, 
+    origin, sid, pstate, `describe`, cateid
+  </sql>
+  <select id="findByID" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where productid = #{productid,jdbcType=INTEGER}
+    and pstate = 2
+  </select>
+  <select id="findAll" resultType="cn.xy.bean.Product">
+    select <include refid="Base_Column_List"></include>
+    from product where pstate = 2
+  </select>
+
+
+  <delete id="delByProductid" parameterType="java.lang.Integer">
+    delete from product
+    where productid = #{productid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertBatch" keyColumn="productid" keyProperty="productid" parameterType="cn.xy.bean.Product" useGeneratedKeys="true">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productname != null">
+        productname,
+      </if>
+      <if test="productimage != null">
+        productimage,
+      </if>
+      <if test="producttime != null">
+        producttime,
+      </if>
+      <if test="downtime != null">
+        downtime,
+      </if>
+      <if test="productcount != null">
+        productcount,
+      </if>
+      <if test="productprice != null">
+        productprice,
+      </if>
+      <if test="origin != null">
+        origin,
+      </if>
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="pstate != null">
+        pstate,
+      </if>
+      <if test="describe != null">
+        `describe`,
+      </if>
+      <if test="cateid != null">
+        cateid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productimage != null">
+        #{productimage,jdbcType=VARCHAR},
+      </if>
+      <if test="producttime != null">
+        #{producttime,jdbcType=VARCHAR},
+      </if>
+      <if test="downtime != null">
+        #{downtime,jdbcType=VARCHAR},
+      </if>
+      <if test="productcount != null">
+        #{productcount,jdbcType=INTEGER},
+      </if>
+      <if test="productprice != null">
+        #{productprice,jdbcType=DOUBLE},
+      </if>
+      <if test="origin != null">
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="pstate != null">
+        #{pstate,jdbcType=INTEGER},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="cateid != null">
+        #{cateid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateProductid" parameterType="cn.xy.bean.Product">
+    update product
+    <set>
+      <if test="productname != null">
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productimage != null">
+        productimage = #{productimage,jdbcType=VARCHAR},
+      </if>
+      <if test="producttime != null">
+        producttime = #{producttime,jdbcType=VARCHAR},
+      </if>
+      <if test="downtime != null">
+        downtime = #{downtime,jdbcType=VARCHAR},
+      </if>
+      <if test="productcount != null">
+        productcount = #{productcount,jdbcType=INTEGER},
+      </if>
+      <if test="productprice != null">
+        productprice = #{productprice,jdbcType=DOUBLE},
+      </if>
+      <if test="origin != null">
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="pstate != null">
+        pstate = #{pstate,jdbcType=INTEGER},
+      </if>
+      <if test="describe != null">
+        `describe` = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="cateid != null">
+        cateid = #{cateid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where productid = #{productid,jdbcType=INTEGER}
+  </update>
+
+</mapper>

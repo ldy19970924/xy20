@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xy.mapper.AdministratorMapper">
+
+    <sql id="base_colums">
+        `aid`,`aname`,`phone`,`apassword`,`right`
+    </sql>
+    <!--    -->
+    <sql id="base_where">
+        <if test="aid!=null">
+            and `aid`=#{aid,jdbcType=INTEGER}
+        </if>
+        <if test="aname!=null">
+            and aname=#{aname,jdbcType=VARCHAR}
+        </if>
+        <if test="phone!=null">
+            and phone=#{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="apassword!=null">
+            and apassword=#{apassword,jdbcType=VARCHAR}
+        </if>
+        <if test="right!=null">
+            and `right`=#{right,jdbcType=INTEGER}
+        </if>
+
+    </sql>
+    <!-- 基本新增使用的字段列表-->
+    <sql id="base_insert_colums">
+        <trim suffixOverrides=",">
+            <if test="aid!=null">
+                aid,
+            </if>
+            <if test="aname!=null and aname !=''">
+                aname,
+            </if>
+            <if test="phone!=null and phone !=''">
+                phone,
+            </if>
+            <if test="apassword!=null and apassword !=''">
+                apassword,
+            </if>
+            <if test="right!=null">
+                `right`,
+            </if>
+        </trim>
+
+    </sql>
+    <!-- 基本新增使用的值列表-->
+    <sql id="base_insert_values">
+        <trim suffixOverrides=",">
+            <if test="aid!=null">
+                #{aid,jdbcType=INTEGER},
+            </if>
+            <if test="aname!=null and aname!=''">
+                #{aname,jdbcType=VARCHAR},
+            </if>
+            <if test="phone!=null and phone!=''">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="apassword!=null and apassword!=''">
+                #{apassword,jdbcType=VARCHAR},
+            </if>
+            <if test="right!=null">
+                #{right,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </sql>
+<!--    修改-->
+    <sql id="base_update">
+
+        <if test="aname!=null and aname!=''">
+            `aname`=#{aname},
+        </if>
+        <if test="phone!=null and phone!=''">
+            `phone`=#{phone},
+        </if>
+        <if test="apassword!=null and apassword!=''">
+            `apassword`=#{apassword},
+        </if>
+        <if test="right!=null">
+            `right`=#{right},
+        </if>
+
+    </sql>
+    <!--    添加管理员-->
+    <select id="findAdministrator" resultType="cn.xy.bean.Administrator">
+        select
+        <include refid="base_colums"></include>
+        from `administrator`
+        <where>
+            <include refid="base_where"></include>
+        </where>
+    </select>
+
+<!--    批量删除管理员-->
+    <delete id="deleteAdministrator">
+        delete from `administrator`
+        <where>
+            <foreach collection="aids" item="aid" open="aid in(" separator="," close=")">
+               #{aid}
+            </foreach>
+        </where>
+    </delete>
+
+    <insert id="save" parameterType="Administrator" useGeneratedKeys="true" keyProperty="aid" keyColumn="aid">
+
+        <if test="aid!=null">
+        update `administrator`
+            <set>
+                <include refid="base_update"/>
+            </set>
+            where `aid` = #{aid,jdbcType=INTEGER}
+        </if>
+        <if test="aid==null">
+            insert into `administrator`
+            (<include refid="base_insert_colums"/>)
+            values (<include refid="base_insert_values"/>)
+        </if>
+    </insert>
+    <!-- 管理员登录mapper start-->
+        <select id="login" parameterType="Administrator" resultType="Administrator">
+            select * from administrator
+            where aname=#{aname,jdbcType=VARCHAR} and apassword=#{apassword,jdbcType=VARCHAR}
+        </select>
+        <!-- 管理员登录mapper end-->
+
+        <!--  管理员注册mapper start  -->
+        <insert id="register" parameterType="Administrator">
+            insert into administrator(aname, phone, apassword,`right`)
+            values(#{aname},#{phone},#{apassword},#{right})
+        </insert>
+        <!-- 管理员注册mapper end-->
+</mapper>

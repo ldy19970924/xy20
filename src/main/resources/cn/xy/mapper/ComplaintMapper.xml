@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xy.mapper.ComplaintMapper">
+
+    <sql id="base_colums">
+            `cid`,`uid`,`ctime`,`producted`,`content`,`cstate`,`result`
+    </sql>
+    <!--    -->
+    <sql id="base_where">
+        <if test="cid!=null">
+            and `cid`=#{cid,jdbcType=INTEGER}
+        </if>
+        <if test="uid!=null">
+            and `uid`=#{uid,jdbcType=INTEGER}
+        </if>
+        <if test="ctime!=null and ctime!=''">
+            and `ctime`=#{ctime,jdbcType=VARCHAR}
+        </if>
+        <if test="producted!=null">
+            and `producted`=#{producted,jdbcType=INTEGER}
+        </if>
+        <if test="content!=null and content!=''">
+            and `content`=#{content,jdbcType=VARCHAR}
+        </if>
+        <if test="cstate!=null">
+            and `cstate`=#{cstate,jdbcType=INTEGER}
+        </if>
+        <if test="result!=null">
+            and `result`=#{result,jdbcType=VARCHAR}
+        </if>
+
+    </sql>
+    <!-- 基本新增使用的字段列表-->
+    <sql id="base_insert_colums">
+        <trim suffixOverrides=",">
+            <if test="cid!=null">
+               `cid`,
+            </if>
+            <if test="uid!=null">
+               `uid`,
+            </if>
+            <if test="ctime!=null and ctime!=''">
+                `ctime`,
+            </if>
+            <if test="`producted`!=null and `producted`!=''">
+               `producted`,
+            </if>
+            <if test="content!=null and content!=''">
+               `content`,
+            </if>
+            <if test="cstate!=null">
+               `cstate`,
+            </if>
+            <if test="result!=null and result!=''">
+               `result`,
+            </if>
+        </trim>
+
+    </sql>
+    <!-- 基本新增使用的值列表-->
+    <sql id="base_insert_values">
+        <trim suffixOverrides=",">
+            <if test="cid!=null">
+                `cid`=#{cid,jdbcType=INTEGER},
+            </if>
+            <if test="uid!=null">
+               `uid`=#{uid,jdbcType=INTEGER},
+            </if>
+            <if test="ctime!=null and ctime!=''">
+               `ctime`=#{ctime,jdbcType=VARCHAR},
+            </if>
+            <if test="producted!=null">
+                `producted`=#{producted,jdbcType=INTEGER},
+            </if>
+            <if test="content!=null and content=''">
+               `content`=#{content,jdbcType=VARCHAR},
+            </if>
+            <if test="cstate!=null">
+               `cstate`=#{cstate,jdbcType=INTEGER},
+            </if>
+            <if test="result!=null and result=''">
+                `result`=#{result,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </sql>
+
+<!--查询所有投诉-->
+    <select id="findComplaint" resultType="Complaint">
+        select
+        <include refid="base_colums"/>
+        from `complaint`
+        <where>
+            <include refid="base_where"/>
+        </where>
+    </select>
+
+<!--修改投诉-->
+    <update id="updateResult">
+        update `complaint`
+        set `result`=#{result,jdbcType=VARCHAR}
+        where `cid`=#{cid,jdbcType=INTEGER}
+    </update>
+<!--删除投诉-->
+    <delete id="deleteComplaint">
+        delete from `complaint`
+        <where>
+            <foreach collection="cids" item="cid" open="cid in(" separator="," close=")">
+                #{cid}
+            </foreach>
+        </where>
+    </delete>
+
+    <update id="updateComplaintState">
+        update `complaint`
+        set `cstate`=#{cstate,jdbcType=INTEGER}
+        where `cid`=#{cid,jdbcType=INTEGER}
+    </update>
+</mapper>
