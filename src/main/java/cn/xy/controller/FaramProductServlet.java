@@ -1,4 +1,4 @@
-package cn.xy.servlet;
+package cn.xy.controller;
 
 import cn.xy.bean.Product;
 import cn.xy.service.FaramProductService;
@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

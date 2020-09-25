@@ -1,4 +1,4 @@
-package cn.xy.servlet;
+package cn.xy.controller;
 
 import cn.xy.bean.Administrator;
 import cn.xy.service.AdministratorService;
@@ -30,7 +30,6 @@ public class AdministratorLoginServlet extends HttpServlet {
         }
         resp.getWriter().println("Login success");
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Administrator administrator = administratorService.login(req.getParameter("aname"), req.getParameter("apassword"));

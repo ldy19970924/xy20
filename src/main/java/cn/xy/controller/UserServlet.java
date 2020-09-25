@@ -1,7 +1,6 @@
-package cn.xy.servlet;
+package cn.xy.controller;
 
 import cn.xy.bean.Administrator;
-import cn.xy.bean.Complaint;
 import cn.xy.bean.User;
 import cn.xy.service.UserService;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package cn.xy.servlet;
+package cn.xy.controller;
 
 import cn.xy.bean.Cart;
 import cn.xy.bean.CartItem;

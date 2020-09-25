@@ -1,4 +1,4 @@
-package cn.xy.servlet;
+package cn.xy.controller;
 
 import cn.xy.bean.Administrator;
 import cn.xy.service.AdministratorService;

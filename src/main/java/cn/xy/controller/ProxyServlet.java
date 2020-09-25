@@ -1,4 +1,4 @@
-package cn.xy.servlet;
+package cn.xy.controller;
 
 
 import org.springframework.web.context.WebApplicationContext;

@@ -1,4 +1,4 @@
-package cn.xy.servlet;
+package cn.xy.controller;
 import cn.xy.service.AdministratorService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

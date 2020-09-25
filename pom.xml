@@ -22,11 +22,7 @@
     </dependency>
     <!--    mybatis end-->
     <!--    spring begin-->
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>5.2.8.RELEASE</version>
-    </dependency>
+
     <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-jdbc</artifactId>
@@ -34,11 +30,9 @@
     </dependency>
     <dependency>
         <groupId>org.springframework</groupId>
-        <artifactId>spring-web</artifactId>
-        <version>5.2.8.RELEASE</version>
-    </dependency>
-
-    <!--    spring end-->
+        <artifactId>spring-webmvc</artifactId>
+        <version>4.3.29.RELEASE</version>
+    </dependency><!--    spring end-->
     <!--    descore begin-->
     <dependency>
     <groupId>com.alibaba</groupId>
@@ -140,6 +134,22 @@
                     <webAppConfig>
                         <contextPath>/</contextPath>
                     </webAppConfig>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
                 </configuration>
             </plugin>
         </plugins>
