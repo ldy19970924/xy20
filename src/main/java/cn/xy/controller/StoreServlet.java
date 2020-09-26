@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * 农户管理
+ * @author 李东盈
+ */
 @Controller("store")
 public class StoreServlet extends HttpServlet {
     @Resource(name = "storeServiceImpl")

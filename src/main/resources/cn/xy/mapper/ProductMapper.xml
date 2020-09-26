@@ -10,25 +10,25 @@
     <result column="productcount" jdbcType="INTEGER" property="productcount" />
     <result column="productprice" jdbcType="DOUBLE" property="productprice" />
     <result column="origin" jdbcType="VARCHAR" property="origin" />
-    <result column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="pstate" jdbcType="INTEGER" property="pstate" />
+    <result column="storeid" jdbcType="INTEGER" property="storeid" />
+    <result column="productstate" jdbcType="INTEGER" property="productstate" />
     <result column="describe" jdbcType="VARCHAR" property="describe" />
-    <result column="cateid" jdbcType="INTEGER" property="cateid" />
+    <result column="categoryid" jdbcType="INTEGER" property="categoryid" />
   </resultMap>
   <sql id="Base_Column_List">
     productid, productname, productimage, producttime, downtime, productcount, productprice, 
-    origin, sid, pstate, `describe`, cateid
+    origin, storeid, productstate, `describe`, categoryid
   </sql>
   <select id="findByID" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from product
     where productid = #{productid,jdbcType=INTEGER}
-    and pstate = 2
+    and productstate = 2
   </select>
   <select id="findAll" resultType="cn.xy.bean.Product">
     select <include refid="Base_Column_List"></include>
-    from product where pstate = 2
+    from product where productstate = 2
   </select>
 
 
@@ -61,17 +61,17 @@
       <if test="origin != null">
         origin,
       </if>
-      <if test="sid != null">
-        sid,
+      <if test="storeid != null">
+        storeid,
       </if>
-      <if test="pstate != null">
-        pstate,
+      <if test="productstate != null">
+        productstate,
       </if>
       <if test="describe != null">
         `describe`,
       </if>
-      <if test="cateid != null">
-        cateid,
+      <if test="categoryid != null">
+        categoryid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -96,17 +96,17 @@
       <if test="origin != null">
         #{origin,jdbcType=VARCHAR},
       </if>
-      <if test="sid != null">
-        #{sid,jdbcType=INTEGER},
+      <if test="storeid != null">
+        #{storeid,jdbcType=INTEGER},
       </if>
-      <if test="pstate != null">
-        #{pstate,jdbcType=INTEGER},
+      <if test="productstate != null">
+        #{productstate,jdbcType=INTEGER},
       </if>
       <if test="describe != null">
         #{describe,jdbcType=VARCHAR},
       </if>
-      <if test="cateid != null">
-        #{cateid,jdbcType=INTEGER},
+      <if test="categoryid != null">
+        #{categoryid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -135,17 +135,17 @@
       <if test="origin != null">
         origin = #{origin,jdbcType=VARCHAR},
       </if>
-      <if test="sid != null">
-        sid = #{sid,jdbcType=INTEGER},
+      <if test="storeid != null">
+        storeid = #{storeid,jdbcType=INTEGER},
       </if>
-      <if test="pstate != null">
-        pstate = #{pstate,jdbcType=INTEGER},
+      <if test="productstate != null">
+        productstate = #{pstate,jdbcType=INTEGER},
       </if>
       <if test="describe != null">
         `describe` = #{describe,jdbcType=VARCHAR},
       </if>
-      <if test="cateid != null">
-        cateid = #{cateid,jdbcType=INTEGER},
+      <if test="categoryid != null">
+        categoryid = #{categoryid,jdbcType=INTEGER},
       </if>
     </set>
     where productid = #{productid,jdbcType=INTEGER}

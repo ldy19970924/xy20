@@ -15,6 +15,10 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 用户管理
+ * @author 李东盈
+ */
 @Controller
 public class UserServlet extends HttpServlet {
     @Resource(name = "userServiceImpl")
@@ -67,20 +71,20 @@ public class UserServlet extends HttpServlet {
                     List<User> users = this.userService.findUserById(Integer.valueOf(uid));
                 for (User user: users) {
                     //正常状态账号封禁
-                    if(user.getUstate()==0 && state.equals("禁用")){
+                    if(user.getUserstate()==0 && state.equals("禁用")){
                         Date date = new Date();
                         String format = DateFormat.getDateTimeInstance().format(date);
-                        user.setFreezetime(format);
-                        user.setUstate(1);
+                        user.setUserfreezetime(format);
+                        user.setUserstate(1);
                         this.userService.updateUserStateById(Integer.valueOf(uid), user);
                         findAllUser(req, resp);
                     }
                     //封禁账号解封
-                    if(user.getUstate()==2 && state.equals("启用")){
+                    if(user.getUserstate()==2 && state.equals("启用")){
                         Date date = new Date();
                         String format = DateFormat.getDateTimeInstance().format(date);
-                        user.setUnlocktime(format);
-                        user.setUstate(0);
+                        user.setUserunlocktime(format);
+                        user.setUserstate(0);
                         this.userService.updateUserStateById(Integer.valueOf(uid), user);
                         findAllUser(req, resp);
                 }

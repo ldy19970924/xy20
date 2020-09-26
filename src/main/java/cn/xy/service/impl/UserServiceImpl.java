@@ -11,6 +11,9 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author 李东盈
+ */
 @Setter
 @Service(value = "userServiceImpl")
 public class UserServiceImpl implements UserService {
@@ -33,7 +36,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> findUserByState(Integer state) {
-        return userMapper.findUser(new User().setUstate(state));
+        return userMapper.findUser(new User().setUserstate(state));
     }
 
     /**
@@ -43,7 +46,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> findUserById(Integer uid) {
-        return userMapper.findUser(new User().setUid(uid));
+        return userMapper.findUser(new User().setUserid(uid));
     }
 
     /**
@@ -60,30 +63,4 @@ public class UserServiceImpl implements UserService {
         return "修改失败";
     }
 
-    @Override
-    public User login(String uName, String password) {
-        return userMapper.login(uName,password);
-    }
-
-    @Override
-    public User loginByPhone(String phone, String code) {
-        return userMapper.loginByPhone(phone,code);
-    }
-
-    @Override
-    public int register(String uName, String password, String image, String phone,int state, String ucdCard) {
-        int k=0;
-        if(uName.equals("") || uName==null || password.equals("") || password == null){
-            return k;
-        }
-
-        k=userMapper.register(new User().setUname(uName).setUcdcard(ucdCard).setPassword(password).setImage(image).setPhone(phone).setUstate(state));
-        return k;
-    }
-
-    @Override
-    public int registerByPhone(String uName,String password,String phone, int state, String ucdCard, String code) {
-        int k = userMapper.registerByPhone(new User().setUname(phone).setPassword(password).setPhone(phone).setUstate(state).setUcdcard(ucdCard), code);
-        return k;
-    }
 }

@@ -5,27 +5,27 @@
 <mapper namespace="cn.xy.mapper.ComplaintMapper">
 
     <sql id="base_colums">
-            `cid`,`uid`,`ctime`,`producted`,`content`,`cstate`,`result`
+            `complaintid`,`userid`,`complainttime`,`productid`,`content`,`complaintstate`,`result`
     </sql>
     <!--    -->
     <sql id="base_where">
-        <if test="cid!=null">
-            and `cid`=#{cid,jdbcType=INTEGER}
+        <if test="complaintid!=null">
+            and `complaintid`=#{complaintid,jdbcType=INTEGER}
         </if>
-        <if test="uid!=null">
-            and `uid`=#{uid,jdbcType=INTEGER}
+        <if test="userid!=null">
+            and `userid`=#{userid,jdbcType=INTEGER}
         </if>
-        <if test="ctime!=null and ctime!=''">
-            and `ctime`=#{ctime,jdbcType=VARCHAR}
+        <if test="complainttime!=null and complainttime!=''">
+            and `complainttime`=#{complainttime,jdbcType=VARCHAR}
         </if>
-        <if test="producted!=null">
-            and `producted`=#{producted,jdbcType=INTEGER}
+        <if test="productid!=null">
+            and `productid`=#{productid,jdbcType=INTEGER}
         </if>
         <if test="content!=null and content!=''">
             and `content`=#{content,jdbcType=VARCHAR}
         </if>
-        <if test="cstate!=null">
-            and `cstate`=#{cstate,jdbcType=INTEGER}
+        <if test="complaintstate!=null">
+            and `complaintstate`=#{complaintstate,jdbcType=INTEGER}
         </if>
         <if test="result!=null">
             and `result`=#{result,jdbcType=VARCHAR}
@@ -35,23 +35,23 @@
     <!-- 基本新增使用的字段列表-->
     <sql id="base_insert_colums">
         <trim suffixOverrides=",">
-            <if test="cid!=null">
-               `cid`,
+            <if test="complaintid!=null">
+               `complaintid`,
             </if>
-            <if test="uid!=null">
-               `uid`,
+            <if test="userid!=null">
+               `userid`,
             </if>
-            <if test="ctime!=null and ctime!=''">
-                `ctime`,
+            <if test="complainttime!=null and complainttime!=''">
+                `complainttime`,
             </if>
-            <if test="`producted`!=null and `producted`!=''">
-               `producted`,
+            <if test="`productid`!=null and `productid`!=''">
+               `productid`,
             </if>
             <if test="content!=null and content!=''">
                `content`,
             </if>
-            <if test="cstate!=null">
-               `cstate`,
+            <if test="complaintstate!=null">
+               `complaintstate`,
             </if>
             <if test="result!=null and result!=''">
                `result`,
@@ -62,23 +62,23 @@
     <!-- 基本新增使用的值列表-->
     <sql id="base_insert_values">
         <trim suffixOverrides=",">
-            <if test="cid!=null">
-                `cid`=#{cid,jdbcType=INTEGER},
+            <if test="complaintid!=null">
+                `complaintid`=#{complaintid,jdbcType=INTEGER},
             </if>
-            <if test="uid!=null">
-               `uid`=#{uid,jdbcType=INTEGER},
+            <if test="userid!=null">
+               `userid`=#{userid,jdbcType=INTEGER},
             </if>
-            <if test="ctime!=null and ctime!=''">
-               `ctime`=#{ctime,jdbcType=VARCHAR},
+            <if test="complainttime!=null and complainttime!=''">
+               `complainttime`=#{complainttime,jdbcType=VARCHAR},
             </if>
-            <if test="producted!=null">
-                `producted`=#{producted,jdbcType=INTEGER},
+            <if test="productid!=null">
+                `productid`=#{productid,jdbcType=INTEGER},
             </if>
             <if test="content!=null and content=''">
                `content`=#{content,jdbcType=VARCHAR},
             </if>
-            <if test="cstate!=null">
-               `cstate`=#{cstate,jdbcType=INTEGER},
+            <if test="complaintstate!=null">
+               `complaintstate`=#{complaintstate,jdbcType=INTEGER},
             </if>
             <if test="result!=null and result=''">
                 `result`=#{result,jdbcType=VARCHAR},
@@ -100,21 +100,21 @@
     <update id="updateResult">
         update `complaint`
         set `result`=#{result,jdbcType=VARCHAR}
-        where `cid`=#{cid,jdbcType=INTEGER}
+        where `complaintid`=#{complaintid,jdbcType=INTEGER}
     </update>
 <!--删除投诉-->
     <delete id="deleteComplaint">
         delete from `complaint`
         <where>
-            <foreach collection="cids" item="cid" open="cid in(" separator="," close=")">
-                #{cid}
+            <foreach collection="complaintids" item="complaintid" open="complaintid in(" separator="," close=")">
+                #{complaintid}
             </foreach>
         </where>
     </delete>
 
     <update id="updateComplaintState">
         update `complaint`
-        set `cstate`=#{cstate,jdbcType=INTEGER}
-        where `cid`=#{cid,jdbcType=INTEGER}
+        set `complaintstate`=#{complaintstate,jdbcType=INTEGER}
+        where `complaintid`=#{complaintid,jdbcType=INTEGER}
     </update>
 </mapper>

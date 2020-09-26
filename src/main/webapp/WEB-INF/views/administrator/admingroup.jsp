@@ -8,11 +8,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <meta charset="utf-8">
     <title>
-        投诉列表
+        管理员列表
     </title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -27,16 +28,17 @@
 <div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>首页</cite></a>
-              <a><cite>投诉管理</cite></a>
-              <a><cite>投诉列表</cite></a>
+              <a><cite>管理员管理</cite></a>
+              <a><cite>管理员列表</cite></a>
             </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
 
     <xblock>
-        <button class="layui-btn layui-btn-danger" id="del">
+    <button class="layui-btn layui-btn-danger" id="del">
             <i class="layui-icon">&#xe640;</i>批量删除</button>
+    <button class="layui-btn" id="add"><i class="layui-icon">&#xe608;</i>添加</button>
     </xblock>
     <table class="layui-table">
         <thead>
@@ -48,19 +50,16 @@
                 ID
             </th>
             <th>
-                投诉ID
+                角色名
             </th>
             <th>
-                投诉时间
+                密码
             </th>
             <th>
-                商品ID
+                电话
             </th>
             <th>
-                处理状态
-            </th>
-            <th>
-                处理结果
+                权限
             </th>
             <th>
                 操作
@@ -68,30 +67,31 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${allComplaint}" var="list">
+        <c:forEach items="${admainlists}" var="list">
             <tr>
-                <td><input type="checkbox" name="id" value="${list.cid}"></td>
-                <td>${list.uid}</td>
-                <td>${list.ctime}</td>
-                <td>${list.producted}</td>
-                <td>${list.content}</td>
-
+                <td><input type="checkbox" name="id" value="${list.aid}"></td>
+                <td>${list.aid}</td>
+                <td>${list.aname}</td>
+                <td>${list.apassword}</td>
+                <td>${list.phone}</td>
                 <td>
-
-                    <c:if test="${list.cstate == 0}"><c:out value="未处理"/></c:if>
-                    <c:if test="${list.cstate == 1}"><c:out value="已处理"/></c:if>
+                    <c:if test="${fn:contains(list.right,4)}">超级管理员</c:if>
+                    <c:if test="${fn:contains(list.right,1)}">处理投诉</c:if>
+                    <c:if test="${fn:contains(list.right,2)}">账号管理</c:if>
+                    <c:if test="${fn:contains(list.right,3)}">审核商品权限</c:if>
+                    <c:if test="${fn:contains(list.right,5)}">通用权限</c:if>
                 </td>
-                <td>${list.result}</td>
                 <td class="td-manage">
-                    <a title="编辑" href="${pageContext.request.contextPath}/administrator/complaintresult.jsp?cid=${list.cid}"
-                       class="ml-5" style="text-decoration:none">
+                    <a title="编辑" href="${pageContext.request.contextPath}/WEB-INF/views/administrator/pro_add.jsp?aid=${list.aid}"
+                        class="ml-5" style="text-decoration:none">
                         <i class="layui-icon">&#xe642;</i>
-                    </a>
-                    <a title="删除" href="javascript:confirm('是否删除投诉？')?location.href='${pageContext.request.contextPath}/complaint/delectComplaint?id=${list.cid}':void(0)"
-                       style="text-decoration:none">
-                        <i class="layui-icon">&#xe640;</i>
-                    </a>
+                   </a>
+                        <a title="删除" href="javascript:confirm('是否删除${list.aname}的用户？')?location.href='${pageContext.request.contextPath}/admin/deleteAdmins?id=${list.aid}':void(0)"
+                            style="text-decoration:none">
+                                 <i class="layui-icon">&#xe640;</i>
+                        </a>
                 </td>
+
             </tr>
         </c:forEach>
         </tbody>
@@ -111,11 +111,15 @@
             c.checked=allCheckbox.checked
         })
     })
+    let addBtn = document.querySelector("#add");
+    addBtn.addEventListener("click",e=>{
+        location.href=BASE_PATH+"/administrator/pro_add.jsp";
+    })
     let delBtn = document.querySelector("#del");
     delBtn.addEventListener("click",e=>{
         let queryString = aidCheckboxList.filter(c=>c.checked).map(c=>"id="+c.value).join("&")
         if (confirm("是否删除选中的用户？")){
-            location.href=BASE_PATH+"/complaint/delectComplaint?"+queryString;
+            location.href=BASE_PATH+"/admin/deleteAdmins?"+queryString;
         }
     })
 

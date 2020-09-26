@@ -128,21 +128,18 @@ public class AdministratorServlet extends HttpServlet {
         String aid = req.getParameter("aid");
         String aname = req.getParameter("aname");
         String apassword = req.getParameter("apassword");
-        String phone = req.getParameter("phone");
         String right = req.getParameter("community_id");
         Administrator administrator = new Administrator();
         if (aid!=null && !aid.isEmpty()){
-            administrator.setAid(Integer.valueOf(aid));
+            administrator.setAdminid(Integer.valueOf(aid));
         }
 
         if (aname!=null && !aname.isEmpty()){
-            administrator.setAname(aname);
+            administrator.setAdminname(aname);
         }
-        if (phone!=null && !phone.isEmpty()){
-            administrator.setPhone(phone);
-        }
+
         if (apassword!=null && !apassword.isEmpty()){
-            administrator.setApassword(apassword);
+            administrator.setAdminpassword(apassword);
         }
         if (right!=null && !right.isEmpty()){
             administrator.setRight(Integer.valueOf(right));

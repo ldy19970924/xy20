@@ -5,70 +5,82 @@
 <mapper namespace="cn.xy.mapper.StoreMapper">
 
     <sql id="base_colums">
-        `sid`,`sname`,`spassword`,`simage`,`sphone`,`state`,`cdcard`,`sfreezetime`,`sunlocktime`
+        `storeid`,`storeaccount`,`storename`,`storepassword`,`storeimage`,`storephone`,`storestate`,`storecdcard`,`storefreezetime`,`storeunlocktime`,`storeaddress`
     </sql>
     <!--    -->
     <sql id="base_where">
-        <if test="sid!=null">
-            and `sid`=#{sid,jdbcType=INTEGER}
+        <if test="storeid!=null">
+            and `storeid`=#{storeid,jdbcType=INTEGER}
         </if>
-        <if test="sname!=null">
-            and sname=#{sname,jdbcType=VARCHAR}
+        <if test="storeaccount!=null">
+            and storeaccount=#{storeaccount,jdbcType=VARCHAR}
         </if>
-        <if test="spassword!=null">
-            and spassword=#{spassword,jdbcType=VARCHAR}
+        <if test="storename!=null">
+            and storename=#{storename,jdbcType=VARCHAR}
+        </if>
+        <if test="storepassword!=null">
+            and storepassword=#{storepassword,jdbcType=VARCHAR}
         </if>
         <if test="simage!=null">
             and simage=#{simage,jdbcType=VARCHAR}
         </if>
-        <if test="sphone!=null">
-            and sphone=#{sphone,jdbcType=VARCHAR}
+        <if test="storephone!=null">
+            and storephone=#{storephone,jdbcType=VARCHAR}
         </if>
 
-        <if test="state!=null">
-            and state=#{state,jdbcType=INTEGER}
+        <if test="storestate!=null">
+            and storestate=#{storestate,jdbcType=INTEGER}
         </if>
-        <if test="cdcard!=null">
-            and cdcard=#{cdcard,jdbcType=VARCHAR}
+        <if test="storecdcard!=null">
+            and storecdcard=#{storecdcard,jdbcType=VARCHAR}
         </if>
-        <if test="sfreezetime!=null">
-            and sfreezetime=#{sfreezetime,jdbcType=VARCHAR}
+        <if test="storefreezetime!=null">
+            and storefreezetime=#{storefreezetime,jdbcType=VARCHAR}
         </if>
-        <if test="sunlocktime!=null">
-            and sunlocktime=#{sunlocktime,jdbcType=VARCHAR}
+        <if test="storeunlocktime!=null">
+            and storeunlocktime=#{storeunlocktime,jdbcType=VARCHAR}
+        </if>
+        <if test="storeaddress!=null">
+            and storeaddress=#{storeaddress,jdbcType=VARCHAR}
         </if>
 
     </sql>
     <!-- 基本新增使用的字段列表-->
     <sql id="base_insert_colums">
         <trim suffixOverrides=",">
-            <if test="sid!=null">
-                `sid`,
+            <if test="storeid!=null">
+                `storeid`,
             </if>
-            <if test="sname!=null">
-               sname,
+            <if test="storeaccount!=null">
+                storeaccount,
             </if>
-            <if test="spassword!=null">
-                spassword,
+            <if test="storename!=null">
+                storename,
             </if>
-            <if test="simage!=null">
-                simage,
+            <if test="storepassword!=null">
+                storepassword,
             </if>
-            <if test="sphone!=null">
-               sphone=,
+            <if test="storeimage!=null">
+                storeimage,
+            </if>
+            <if test="storephone!=null">
+                storephone,
             </if>
 
-            <if test="state!=null">
-                state,
+            <if test="storestate!=null">
+                storestate,
             </if>
-            <if test="cdcard!=null">
-                cdcard,
+            <if test="storecdcard!=null">
+                storecdcard,
             </if>
-            <if test="sfreezetime!=null">
-                sfreezetime,
+            <if test="storefreezetime!=null">
+                storefreezetime,
             </if>
-            <if test="sunlocktime!=null">
-                sunlocktime,
+            <if test="storeunlocktime!=null">
+                storeunlocktime,
+            </if>
+            <if test="storeaddress!=null">
+                storeaddress,
             </if>
         </trim>
 
@@ -76,33 +88,39 @@
     <!-- 基本新增使用的值列表-->
     <sql id="base_insert_values">
         <trim suffixOverrides=",">
-            <if test="sid!=null">
-                `sid`=#{sid,jdbcType=INTEGER},
+            <if test="storeid!=null">
+                `storeid`=#{storeid,jdbcType=INTEGER},
             </if>
-            <if test="sname!=null||saname!=''">
-                sname=#{sname,jdbcType=VARCHAR},
+            <if test="storeaccount!=null and storeaccount!=''">
+                storeaccount=#{storeaccount,jdbcType=VARCHAR},
             </if>
-            <if test="spassword!=null||spassword!=''">
-                spassword=#{spassword,jdbcType=VARCHAR},
+            <if test="storename!=null and storeaname!=''">
+                storename=#{storename,jdbcType=VARCHAR},
             </if>
-            <if test="simage!=null||simage!=''">
-                simage=#{simage,jdbcType=VARCHAR},
+            <if test="storepassword!=null and storepassword!=''">
+                storepassword=#{storepassword,jdbcType=VARCHAR},
             </if>
-            <if test="sphone!=null||sphone!=''">
-                sphone=#{sphone,jdbcType=VARCHAR},
+            <if test="storeimage!=null and storeimage!=''">
+                storeimage=#{storeimage,jdbcType=VARCHAR},
+            </if>
+            <if test="storephone!=null and storephone!=''">
+                storephone=#{storephone,jdbcType=VARCHAR},
             </if>
 
-            <if test="state!=null">
-                state=#{state,jdbcType=INTEGER},
+            <if test="storestate!=null">
+                storestate=#{storestate,jdbcType=INTEGER},
             </if>
-            <if test="cdcard!=null||cdcard!=''">
-                cdcard=#{cdcard,jdbcType=VARCHAR},
+            <if test="storecdcard!=null and storecdcard!=''">
+                storedcard=#{storecdcard,jdbcType=VARCHAR},
             </if>
-            <if test="sfreezetime!=null||sfreezetime!=''">
-                sfreezetime=#{sfreezetime,jdbcType=VARCHAR},
+            <if test="storefreezetime!=null and storefreezetime!=''">
+                storefreezetime=#{storefreezetime,jdbcType=VARCHAR},
             </if>
-            <if test="sunlocktime!=null">
-                sunlocktime=#{sunlocktime,jdbcType=VARCHAR},
+            <if test="storeunlocktime!=null and storeunlocktime!=''">
+                storeunlocktime=#{storeunlocktime,jdbcType=VARCHAR},
+            </if>
+            <if test="storeaddress!=null and storeaddress!=''">
+                storeaddress=#{storeaddress,jdbcType=VARCHAR},
             </if>
         </trim>
     </sql>
@@ -119,7 +137,7 @@
 <!--修改农户状态-->
     <update id="updateStoreState">
         update `store`
-        set `state`=#{state}
-        where `sid`=#{sid,jdbcType=INTEGER}
+        set `storestate`=#{storestate}
+        where `storeid`=#{storeid,jdbcType=INTEGER}
     </update>
 </mapper>

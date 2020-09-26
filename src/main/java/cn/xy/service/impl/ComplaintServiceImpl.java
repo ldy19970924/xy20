@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author 李东盈
+ */
 @Data
 @Service(value = "complaintServiceImpl")
 public class ComplaintServiceImpl implements ComplaintService {
@@ -60,7 +63,7 @@ public class ComplaintServiceImpl implements ComplaintService {
      */
     @Override
     public List<Complaint> findIsResult() {
-        return complaintMapper.findComplaint(new Complaint().setCstate(1));
+        return complaintMapper.findComplaint(new Complaint().setComplaintstate(1));
     }
 
     /**
@@ -69,7 +72,7 @@ public class ComplaintServiceImpl implements ComplaintService {
      */
     @Override
     public List<Complaint> findNoResult() {
-        return complaintMapper.findComplaint(new Complaint().setCstate(0));
+        return complaintMapper.findComplaint(new Complaint().setComplaintstate(0));
     }
 
     /**
@@ -79,7 +82,7 @@ public class ComplaintServiceImpl implements ComplaintService {
      */
     @Override
     public List<Complaint> findComplaintById(Integer cid) {
-        List<Complaint> list = complaintMapper.findComplaint(new Complaint().setCid(cid));
+        List<Complaint> list = complaintMapper.findComplaint(new Complaint().setComplaintid(cid));
         return list;
     }
 

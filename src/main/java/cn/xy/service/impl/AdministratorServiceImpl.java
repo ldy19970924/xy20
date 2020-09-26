@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+
+/**
+ * @author 李东盈
+ */
 @Slf4j
 @Data
 @Service(value ="administratorServiceImpl")
@@ -45,7 +49,7 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public List<Administrator> findAdmainById(Integer aid) {
-        List<Administrator> list = administratorMapper.findAdministrator(new Administrator().setAid(aid));
+        List<Administrator> list = administratorMapper.findAdministrator(new Administrator().setAdminid(aid));
         return list;
     }
 
@@ -58,36 +62,5 @@ public class AdministratorServiceImpl implements AdministratorService {
         administratorMapper.save(administrator);
     }
 
-    /**
-     * 登录
-     * @param aName
-     * @param aPassword
-     * @return
-     */
-    @Override
-    public Administrator login(String aName, String aPassword) {
 
-        return administratorMapper.login(aName,aPassword);
-    }
-
-    /**
-     * 注册
-     * @param aName
-     * @param phone
-     * @param aPassword
-     * @param right
-     * @return
-     */
-    @Override
-    public int register(String aName, String phone,String aPassword,int right) {
-        int k=0;
-        if(aName == "" || aName==null || aPassword == "" || aPassword == null){
-            return k;
-        }
-        if(!aPassword.equals(aPassword)){
-            return k;
-        }
-        k=administratorMapper.register(new Administrator().setAname(aName).setPhone(phone).setApassword(aPassword).setRight(right));
-        return k;
-    }
 }

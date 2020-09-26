@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 /**
- *
+ * @author 李东盈
  */
 @Repository(value = "storeMapper")
 public interface StoreMapper {

@@ -24,19 +24,5 @@ public interface AdministratorService {
      * @param administrator
      */
     void save(Administrator administrator);
-    /**
-     * @Description 登录方法,通过账号密码登录
-     * @Param username 用户名
-     * @Param password 用户密码
-     **/
-    Administrator login(String aName,String aPassword);
 
-    /**
-     * @Description 注册方法,通过账号密码进行注册
-     * @Param aId 管理院id
-     * @Param aName 用户名
-     * @Param aPassword 用户密码
-     *
-     **/
-    int register(String aName,String phone,String aPassword,int right);
 }

@@ -27,7 +27,7 @@ public class Faram {
     /*
      *农户编号
      */
-    private Integer sid;
+    private Integer storeid;
 
     /*
      *农家乐图片

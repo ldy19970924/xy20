@@ -4,70 +4,76 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xy.mapper.UserMapper">
     <sql id="base_colums">
-        `uid`,`uname`,`password`,`image`,`phone`,`ustate`,`ucdcard`,`freezetime`,`unlocktime`
+        `userid`,`username`,`useraccount`,`userpassword`,`userimage`,`userphone`,`userstate`,`usercdcard`,`userfreezetime`,`userunlocktime`
     </sql>
     <!--    -->
     <sql id="base_where">
-        <if test="uid!=null">
-            and `uid`=#{uid,jdbcType=INTEGER}
+        <if test="userid!=null">
+            and `userid`=#{userid,jdbcType=INTEGER}
         </if>
-        <if test="uname!=null and uname!=''">
-            and uname=#{uname,jdbcType=VARCHAR}
+        <if test="username!=null and username!=''">
+            and username=#{username,jdbcType=VARCHAR}
         </if>
-        <if test="password!=null and password!=''">
-            and `password`=#{password,jdbcType=VARCHAR}
+        <if test="useraccount!=null and useraccount!=''">
+            and useraccount=#{useraccount,jdbcType=VARCHAR}
         </if>
-        <if test="image!=null and image!=''">
-            and image=#{image,jdbcType=VARCHAR}
+        <if test="userpassword!=null and userpassword!=''">
+            and `userpassword`=#{userpassword,jdbcType=VARCHAR}
         </if>
-        <if test="phone!=null and phone!=''">
-            and phone=#{phone,jdbcType=VARCHAR}
+        <if test="userimage!=null and userimage!=''">
+            and userimage=#{userimage,jdbcType=VARCHAR}
+        </if>
+        <if test="userphone!=null and userphone!=''">
+            and userphone=#{userphone,jdbcType=VARCHAR}
         </if>
 
-        <if test="ustate!=null">
-            and ustate=#{ustate,jdbcType=INTEGER}
+        <if test="userstate!=null">
+            and userstate=#{userstate,jdbcType=INTEGER}
         </if>
-        <if test="ucdcard!=null and ucdcard!=''">
-            and ucdcard=#{ucdcard,jdbcType=VARCHAR}
+        <if test="usercdcard!=null and usercdcard!=''">
+            and usercdcard=#{usercdcard,jdbcType=VARCHAR}
         </if>
-        <if test="freezetime!=null and freezetime!=''">
-            and freezetime=#{sfreezetime,jdbcType=VARCHAR}
+        <if test="userfreezetime!=null and userfreezetime!=''">
+            and userfreezetime=#{userfreezetime,jdbcType=VARCHAR}
         </if>
-        <if test="unlocktime!=null and unlocktime!=''">
-            and unlocktime=#{unlocktime,jdbcType=VARCHAR}
+        <if test="userunlocktime!=null and userunlocktime!=''">
+            and userunlocktime=#{userunlocktime,jdbcType=VARCHAR}
         </if>
 
     </sql>
     <!-- 基本新增使用的字段列表-->
     <sql id="base_insert_colums">
         <trim suffixOverrides=",">
-            <if test="uid!=null">
-                `uid`,
+            <if test="userid!=null">
+                `userid`,
             </if>
-            <if test="uname!=null and uname!=''">
-                uname,
+            <if test="username!=null and username!=''">
+                username,
             </if>
-            <if test="password!=null and password!=''">
-            password,
+            <if test="useraccount!=null and useraccount!=''">
+                useraccount,
             </if>
-            <if test="image!=null and image!=''">
-                image,
+            <if test="userpassword!=null and userpassword!=''">
+                userpassword,
             </if>
-            <if test="phone!=null and phone!=''">
-                phone,
+            <if test="userimage!=null and userimage!=''">
+                userimage,
+            </if>
+            <if test="userphone!=null and userphone!=''">
+                userphone,
             </if>
 
-            <if test="ustate!=null">
-                ustate,
+            <if test="userstate!=null">
+                userstate,
             </if>
-            <if test="ucdcard!=null and ucdcard!=''">
-                ucdcard,
+            <if test="usercdcard!=null and usercdcard!=''">
+                usercdcard,
             </if>
-            <if test="freezetime!=null and freezetime!=''">
-                freezetime,
+            <if test="userfreezetime!=null and userfreezetime!=''">
+                userfreezetime,
             </if>
-            <if test="unlocktime!=null and unlocktime!=''">
-                unlocktime,
+            <if test="userunlocktime!=null and userunlocktime!=''">
+                userunlocktime,
             </if>
         </trim>
 
@@ -75,65 +81,71 @@
     <!-- 基本新增使用的值列表-->
     <sql id="base_insert_values">
         <trim suffixOverrides=",">
-            <if test="uid!=null">
-                `uid`=#{uid,jdbcType=INTEGER},
+            <if test="userid!=null">
+                `userid`=#{userid,jdbcType=INTEGER},
             </if>
-            <if test="uname!=null and uname!=''">
-                uname=#{uname,jdbcType=VARCHAR},
+            <if test="username!=null and username!=''">
+                username=#{username,jdbcType=VARCHAR},
             </if>
-            <if test="password!=null and password!=''">
-                password=#{password,jdbcType=VARCHAR},
+            <if test="useraccount!=null and useraccount!=''">
+                useraccount=#{useraccount,jdbcType=VARCHAR},
             </if>
-            <if test="image!=null and image!=''">
-                image=#{image,jdbcType=VARCHAR},
+            <if test="userpassword!=null and userpassword!=''">
+                userpassword=#{userpassword,jdbcType=VARCHAR},
             </if>
-            <if test="phone!=null and phone!=''">
-                phone=#{phone,jdbcType=VARCHAR},
+            <if test="userimage!=null and userimage!=''">
+                userimage=#{userimage,jdbcType=VARCHAR},
+            </if>
+            <if test="userphone!=null and userphone!=''">
+                userphone=#{userphone,jdbcType=VARCHAR},
             </if>
 
-            <if test="ustate!=null">
-                ustate=#{ustate,jdbcType=INTEGER},
+            <if test="userstate!=null">
+                userstate=#{userstate,jdbcType=INTEGER},
             </if>
-            <if test="ucdcard!=null and ucdcard!=''">
-                ucdcard=#{ucdcard,jdbcType=VARCHAR},
+            <if test="usercdcard!=null and usercdcard!=''">
+                usercdcard=#{usercdcard,jdbcType=VARCHAR},
             </if>
-            <if test="freezetime!=null and freezetime!=''">
-                freezetime=#{freezetime,jdbcType=VARCHAR},
+            <if test="userfreezetime!=null and userfreezetime!=''">
+                userfreezetime=#{userfreezetime,jdbcType=VARCHAR},
             </if>
-            <if test="unlocktime!=null">
-                unlocktime=#{unlocktime,jdbcType=VARCHAR},
+            <if test="userunlocktime!=null">
+                userunlocktime=#{userunlocktime,jdbcType=VARCHAR},
             </if>
         </trim>
     </sql>
     <!--    修改-->
     <sql id="base_update">
-        <if test="uid!=null">
-            `uid`=#{uid},
+        <if test="userid!=null">
+            `userid`=#{userid},
         </if>
-        <if test="uname!=null and uname!=''">
-            `uname`=#{uname},
+        <if test="username!=null and username!=''">
+            `username`=#{username},
         </if>
-        <if test="password!=null and password!=''">
-            `password`=#{password},
+        <if test="useraccount!=null and useraccount!=''">
+            `useraccount`=#{useraccount},
         </if>
-        <if test="image!=null and image!=''">
-            `image`=#{image},
+        <if test="userpassword!=null and userpassword!=''">
+            `userpassword`=#{userpassword},
         </if>
-        <if test="phone!=null and phone!=''">
-            `phone`=#{phone},
+        <if test="userimage!=null and userimage!=''">
+            `userimage`=#{userimage},
+        </if>
+        <if test="userphone!=null and userphone!=''">
+            `userphone`=#{userphone},
         </if>
 
-        <if test="ustate!=null">
-            `ustate`=#{ustate},
+        <if test="userstate!=null">
+            `userstate`=#{userstate},
         </if>
-        <if test="ucdcard!=null and ucdcard!=''">
-            `ucdcard`=#{ucdcard},
+        <if test="usercdcard!=null and usercdcard!=''">
+            `usercdcard`=#{usercdcard},
         </if>
         <if test="freezetime!=null and freezetime!=''">
-            `freezetime`=#{phone},
+            `userfreezetime`=#{userfreezetime},
         </if>
         <if test="unlocktime!=null and unlocktime!=''">
-            `unlocktime`=#{unlocktime},
+            `userunlocktime`=#{userunlocktime},
         </if>
 
     </sql>
@@ -153,30 +165,7 @@
             <include refid="base_update">
             </include>
         </set>
-        where `uid`=#{uid,jdbcType=INTEGER}
+        where `userid`=#{userid,jdbcType=INTEGER}
     </update>
 
-    <select id="login" parameterType="User" resultType="User">
-        select * from user
-        where uname=#{uname,jdbcType=VARCHAR}
-          and password=#{password,jdbcType=VARCHAR}
-    </select>
-    <!-- 用户登录mapper end-->
-
-    <!--  用户手机登录mapper start -->
-    <select id="loginByPhone" parameterType="User" resultType="User">
-        select * from user
-        where phone=#{phone,jdbcType=VARCHAR}
-    </select>
-    <!-- 用户手机登录mapper end-->
-    <insert id="register" parameterType="User">
-        insert into user(uname, password, image, phone, ustate, ucdcard)
-        values(#{uname},#{password},#{image},#{phone},#{ustate},#{ucdcard})
-    </insert>
-    <!-- 用户手机注册mapper start-->
-    <insert id="registerByPhone" parameterType="User">
-        insert into user(uname, password, phone, ustate, ucdcard)
-        values(#{user.uName},#{user.password},#{user.phone},#{user.uState},#{user.ucdCard})
-    </insert>
-    <!-- 用户手机注册mapper end-->
 </mapper>

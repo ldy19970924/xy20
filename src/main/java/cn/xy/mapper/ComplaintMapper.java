@@ -19,7 +19,7 @@ public interface ComplaintMapper {
     /**
      * 修改投诉结果
      */
-    int updateResult(@Param("cid")Integer cid, @Param("result") String result);
+    int updateResult(@Param("complaintid")Integer cid, @Param("result") String result);
 
     /**
      * 修改投诉状态
@@ -27,9 +27,9 @@ public interface ComplaintMapper {
      * @param cstate
      * @return
      */
-    int updateComplaintState(@Param("cid")Integer cid, @Param("cstate") Integer cstate);
+    int updateComplaintState(@Param("complaintid")Integer cid, @Param("complaintstate") Integer cstate);
     /**
      * 批量删除投诉
      */
-    int deleteComplaint(@Param("cids") Integer ...cids);
+    int deleteComplaint(@Param("complaintids") Integer ...cids);
 }

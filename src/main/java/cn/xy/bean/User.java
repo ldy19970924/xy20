@@ -13,37 +13,41 @@ public class User {
     /**
      * 用户编号
      */
-    private Integer uid;
+    private Integer userid;
     /**
      * 用户名
      */
-    private String uname;
+    private String username;
+    /**
+     * 用户账号
+     */
+    private String useraccount;
     /**
      * 用户密码
      */
-    private String password;
+    private String userpassword;
     /**
      * 头像
      */
-    private String image;
+    private String userimage;
     /**
      * 电话
      */
-    private String phone;
+    private String userphone;
     /**
      * 状态（0正常、1封禁、2申请解封、3申请解封中）
      */
-    private Integer ustate;
+    private Integer userstate;
     /**
      * 身份证
      */
-    private String ucdcard;
+    private String usercdcard;
     /**
      * 账号冻结时间
      */
-    private String freezetime;
+    private String userfreezetime;
     /**
      * 账号解封时间
      */
-    private String unlocktime;
+    private String userunlocktime;
 }

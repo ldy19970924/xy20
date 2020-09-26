@@ -98,7 +98,7 @@ public class ComplaintServlet extends HttpServlet {
                 Integer ci = null;
                 for (Complaint list: com) {
                      res = list.getResult();
-                     ci=list.getCid();
+                     ci=list.getComplaintid();
                 }
                 //处理结果不为空则修改处理状态
                 if (!res.isEmpty()) {
@@ -152,24 +152,24 @@ public class ComplaintServlet extends HttpServlet {
         String result = req.getParameter("result");
         Complaint complaint = new Complaint();
         if (cid!=null && !cid.isEmpty()){
-            complaint.setCid(Integer.valueOf(cid));
+            complaint.setComplaintid(Integer.valueOf(cid));
         }
 
         if (uid!=null && !uid.isEmpty()){
-            complaint.setUid(Integer.valueOf(uid));
+            complaint.setUserid(Integer.valueOf(uid));
         }
         if (ctime!=null && !ctime.isEmpty()){
-            complaint.setCtime(ctime);
+            complaint.setComplainttime(ctime);
         }
         if (pruducted!=null && !pruducted.isEmpty()){
-            complaint.setProducted(Integer.valueOf(pruducted));
+            complaint.setProductid(Integer.valueOf(pruducted));
         }
         if (content!=null && !content.isEmpty()){
             complaint.setContent(content);
 
         }
         if (cstate!=null && !cstate.isEmpty()){
-            complaint.setCstate(Integer.valueOf(cstate));
+            complaint.setComplaintstate(Integer.valueOf(cstate));
         }
         if (result!=null && !result.isEmpty()){
             complaint.setResult(result);

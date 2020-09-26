@@ -8,7 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -49,55 +48,49 @@
                 ID
             </th>
             <th>
-                用户名
+                投诉ID
             </th>
             <th>
-                头像
+                投诉时间
             </th>
             <th>
-                手机号码
+                商品ID
             </th>
             <th>
-                状态
+                处理状态
             </th>
             <th>
-                身份证号
+                处理结果
             </th>
             <th>
-                封禁时间
+                操作
             </th>
-            <th>
-                解封时间
-            </th>
-            <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${allUserList}" var="list">
+        <c:forEach items="${allComplaint}" var="list">
             <tr>
-                <td><input type="checkbox" name="id" value="${list.uid}"></td>
+                <td><input type="checkbox" name="id" value="${list.cid}"></td>
                 <td>${list.uid}</td>
-                <td>${list.uname}</td>
-                <td>${list.password}</td>
-                <td><img src="${pageContext.request.contextPath}/image/user/${list.image}" width="50" height="30"></td>
+                <td>${list.ctime}</td>
+                <td>${list.producted}</td>
+                <td>${list.content}</td>
 
                 <td>
-<%--                        ${list.ustate}--%>
-                    <c:if test="${list.ustate eq 0}">正常</c:if>
-                    <c:if test="${list.ustate eq 1}">封禁</c:if>
-                    <c:if test="${list.ustate eq 2} ">申请解封</c:if>
+
+                    <c:if test="${list.cstate == 0}"><c:out value="未处理"/></c:if>
+                    <c:if test="${list.cstate == 1}"><c:out value="已处理"/></c:if>
                 </td>
-                <td>${list.ucdcard}</td>
-                <td>${list.freezetime}</td>
-                <td>${list.unlocktime}</td>
+                <td>${list.result}</td>
                 <td class="td-manage">
-<%--                    <a class="layui-btn layui-btn-danger" href="${pageContext.request.contextPath}/userInfo/updateUserState?uid=${list.uid}&state=启用">启用</a>--%>
-<%--                    <a class="layui-btn layui-btn-danger" href="${pageContext.request.contextPath}/userInfo/updateUserState?uid=${list.uid}&state=禁用">禁用</a>--%>
-                    <a title="编辑" href="${pageContext.request.contextPath}/administrator/userstate.jsp?uid=${list.uid}"
+                    <a title="编辑" href="${pageContext.request.contextPath}/WEB-INF/views/administrator/complaintresult.jsp?cid=${list.cid}"
                        class="ml-5" style="text-decoration:none">
                         <i class="layui-icon">&#xe642;</i>
                     </a>
-
+                    <a title="删除" href="javascript:confirm('是否删除投诉？')?location.href='${pageContext.request.contextPath}/complaint/delectComplaint?id=${list.cid}':void(0)"
+                       style="text-decoration:none">
+                        <i class="layui-icon">&#xe640;</i>
+                    </a>
                 </td>
             </tr>
         </c:forEach>
@@ -110,21 +103,21 @@
 <script src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/js/x-layui.js" charset="utf-8"></script>
 <script>
-    <%--const BASE_PATH="${pageContext.request.contextPath}";--%>
-    <%--let allCheckbox = document.querySelector("#all");--%>
-    <%--let aidCheckboxList = Array.from(document.querySelectorAll("input[name=id]"));--%>
-    <%--allCheckbox.addEventListener("change",e=>{--%>
-    <%--    aidCheckboxList.forEach(c=>{--%>
-    <%--        c.checked=allCheckbox.checked--%>
-    <%--    })--%>
-    <%--})--%>
-    <%--let delBtn = document.querySelector("#del");--%>
-    <%--delBtn.addEventListener("click",e=>{--%>
-    <%--    let queryString = aidCheckboxList.filter(c=>c.checked).map(c=>"id="+c.value).join("&")--%>
-    <%--    if (confirm("是否删除选中的用户？")){--%>
-    <%--        location.href=BASE_PATH+"/complaint/delectComplaint?"+queryString;--%>
-    <%--    }--%>
-    <%--})--%>
+    const BASE_PATH="${pageContext.request.contextPath}";
+    let allCheckbox = document.querySelector("#all");
+    let aidCheckboxList = Array.from(document.querySelectorAll("input[name=id]"));
+    allCheckbox.addEventListener("change",e=>{
+        aidCheckboxList.forEach(c=>{
+            c.checked=allCheckbox.checked
+        })
+    })
+    let delBtn = document.querySelector("#del");
+    delBtn.addEventListener("click",e=>{
+        let queryString = aidCheckboxList.filter(c=>c.checked).map(c=>"id="+c.value).join("&")
+        if (confirm("是否删除选中的用户？")){
+            location.href=BASE_PATH+"/complaint/delectComplaint?"+queryString;
+        }
+    })
 
     layui.use(['laydate','element','laypage','layer'], function(){
         $ = layui.jquery;//jquery

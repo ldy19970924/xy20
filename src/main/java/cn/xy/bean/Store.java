@@ -14,37 +14,45 @@ public class Store {
     /**
      * 用户编号
      */
-    private Integer sid;
+    private Integer storeid;
+    /**
+     * 用户账号
+     */
+    private String storeaccount;
     /**
      * 用户名
      */
-    private String sname;
+    private String storename;
     /**
      * 用户密码
      */
-    private String spassword;
+    private String storepassword;
     /**
      * 头像
      */
-    private String simage;
+    private String storeimage;
     /**
      * 电话
      */
-    private String sphone;
+    private String storephone;
     /**
      * 状态（0正常、1封禁、2申请解封、3申请解封中）
      */
-    private Integer state;
+    private Integer storestate;
     /**
      * 身份证
      */
-    private String cdcard;
+    private String storecdcard;
     /**
      * 账号冻结时间
      */
-    private String sfreezetime;
+    private String storefreezetime;
     /**
      * 账号解封时间
      */
-    private String sunlocktime;
+    private String storeunlocktime;
+    /**
+     * 农户地址
+     */
+    private  String storeaddress;
 }

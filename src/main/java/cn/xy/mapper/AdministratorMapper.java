@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 管理员持久层
- *
+ * @author 李东盈
  */
 
 @Repository(value = "administratorMapper")
@@ -27,18 +27,6 @@ public interface AdministratorMapper {
     /**
      * 批量删除管理员
      */
-    int deleteAdministrator(@Param("aids") Integer ...aids);
-    /**
-     * @Description 登录方法,通过账号密码登录
-     * @Param username 用户名
-     * @Param password 用户密码
-     **/
-    Administrator login(@Param("aname") String aName, @Param("apassword") String aPassword);
+    int deleteAdministrator(@Param("adminids") Integer ...aids);
 
-    /**
-     * @Description 注册方法,通过账号密码进行注册
-     * @Param aName 用户名
-     * @Param aPassword 用户密码
-     **/
-    int register(Administrator administrator);
 }

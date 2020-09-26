@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author 李东盈
+ */
 @Setter
 @Service(value = "storeServiceImpl")
 public class StoreServiceImpl implements StoreService {
@@ -33,7 +36,7 @@ public class StoreServiceImpl implements StoreService {
      */
     @Override
     public List<Store> findStoreByState(Integer state) {
-        return storeMapper.findStore(new Store().setState(state));
+        return storeMapper.findStore(new Store().setStorestate(state));
     }
 
     /**

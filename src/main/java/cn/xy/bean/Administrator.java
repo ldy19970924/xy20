@@ -17,22 +17,18 @@ public class Administrator {
     /**
      * 管理员编号
      */
-    private Integer aid;
+    private Integer adminid;
 
     /**
      * 管理员账号
      */
-    private String aname;
+    private String adminname;
 
-    /**
-     * 手机号
-     */
-    private String phone;
 
     /**
      *管理员密码
      */
-    private String apassword;
+    private String adminpassword;
 
     /**
      *管理员权限（4超级管理员、1处理投诉、2账号管理、3审核商品权限、5通用权限）

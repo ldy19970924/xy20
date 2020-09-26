@@ -8,12 +8,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 <head>
     <meta charset="utf-8">
     <title>
-        管理员列表
+        投诉列表
     </title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -28,17 +28,16 @@
 <div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>首页</cite></a>
-              <a><cite>管理员管理</cite></a>
-              <a><cite>管理员列表</cite></a>
+              <a><cite>投诉管理</cite></a>
+              <a><cite>投诉列表</cite></a>
             </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
 
     <xblock>
-    <button class="layui-btn layui-btn-danger" id="del">
+        <button class="layui-btn layui-btn-danger" id="del">
             <i class="layui-icon">&#xe640;</i>批量删除</button>
-    <button class="layui-btn" id="add"><i class="layui-icon">&#xe608;</i>添加</button>
     </xblock>
     <table class="layui-table">
         <thead>
@@ -50,48 +49,56 @@
                 ID
             </th>
             <th>
-                角色名
+                用户名
             </th>
             <th>
-                密码
+                头像
             </th>
             <th>
-                电话
+                手机号码
             </th>
             <th>
-                权限
+                状态
             </th>
             <th>
-                操作
+                身份证号
             </th>
+            <th>
+                封禁时间
+            </th>
+            <th>
+                解封时间
+            </th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${admainlists}" var="list">
+        <c:forEach items="${allUserList}" var="list">
             <tr>
-                <td><input type="checkbox" name="id" value="${list.aid}"></td>
-                <td>${list.aid}</td>
-                <td>${list.aname}</td>
-                <td>${list.apassword}</td>
-                <td>${list.phone}</td>
-                <td>
-                    <c:if test="${fn:contains(list.right,4)}">超级管理员</c:if>
-                    <c:if test="${fn:contains(list.right,1)}">处理投诉</c:if>
-                    <c:if test="${fn:contains(list.right,2)}">账号管理</c:if>
-                    <c:if test="${fn:contains(list.right,3)}">审核商品权限</c:if>
-                    <c:if test="${fn:contains(list.right,5)}">通用权限</c:if>
-                </td>
-                <td class="td-manage">
-                    <a title="编辑" href="${pageContext.request.contextPath}/administrator/pro_add.jsp?aid=${list.aid}"
-                        class="ml-5" style="text-decoration:none">
-                        <i class="layui-icon">&#xe642;</i>
-                   </a>
-                        <a title="删除" href="javascript:confirm('是否删除${list.aname}的用户？')?location.href='${pageContext.request.contextPath}/admin/deleteAdmins?id=${list.aid}':void(0)"
-                            style="text-decoration:none">
-                                 <i class="layui-icon">&#xe640;</i>
-                        </a>
-                </td>
+                <td><input type="checkbox" name="id" value="${list.uid}"></td>
+                <td>${list.uid}</td>
+                <td>${list.uname}</td>
+                <td>${list.password}</td>
+                <td><img src="${pageContext.request.contextPath}/image/user/${list.image}" width="50" height="30"></td>
 
+                <td>
+<%--                        ${list.ustate}--%>
+                    <c:if test="${list.ustate eq 0}">正常</c:if>
+                    <c:if test="${list.ustate eq 1}">封禁</c:if>
+                    <c:if test="${list.ustate eq 2} ">申请解封</c:if>
+                </td>
+                <td>${list.ucdcard}</td>
+                <td>${list.freezetime}</td>
+                <td>${list.unlocktime}</td>
+                <td class="td-manage">
+<%--                    <a class="layui-btn layui-btn-danger" href="${pageContext.request.contextPath}/userInfo/updateUserState?uid=${list.uid}&state=启用">启用</a>--%>
+<%--                    <a class="layui-btn layui-btn-danger" href="${pageContext.request.contextPath}/userInfo/updateUserState?uid=${list.uid}&state=禁用">禁用</a>--%>
+                    <a title="编辑" href="${pageContext.request.contextPath}/WEB-INF/views/administrator/userstate.jsp?uid=${list.uid}"
+                       class="ml-5" style="text-decoration:none">
+                        <i class="layui-icon">&#xe642;</i>
+                    </a>
+
+                </td>
             </tr>
         </c:forEach>
         </tbody>
@@ -103,25 +110,21 @@
 <script src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/js/x-layui.js" charset="utf-8"></script>
 <script>
-    const BASE_PATH="${pageContext.request.contextPath}";
-    let allCheckbox = document.querySelector("#all");
-    let aidCheckboxList = Array.from(document.querySelectorAll("input[name=id]"));
-    allCheckbox.addEventListener("change",e=>{
-        aidCheckboxList.forEach(c=>{
-            c.checked=allCheckbox.checked
-        })
-    })
-    let addBtn = document.querySelector("#add");
-    addBtn.addEventListener("click",e=>{
-        location.href=BASE_PATH+"/administrator/pro_add.jsp";
-    })
-    let delBtn = document.querySelector("#del");
-    delBtn.addEventListener("click",e=>{
-        let queryString = aidCheckboxList.filter(c=>c.checked).map(c=>"id="+c.value).join("&")
-        if (confirm("是否删除选中的用户？")){
-            location.href=BASE_PATH+"/admin/deleteAdmins?"+queryString;
-        }
-    })
+    <%--const BASE_PATH="${pageContext.request.contextPath}";--%>
+    <%--let allCheckbox = document.querySelector("#all");--%>
+    <%--let aidCheckboxList = Array.from(document.querySelectorAll("input[name=id]"));--%>
+    <%--allCheckbox.addEventListener("change",e=>{--%>
+    <%--    aidCheckboxList.forEach(c=>{--%>
+    <%--        c.checked=allCheckbox.checked--%>
+    <%--    })--%>
+    <%--})--%>
+    <%--let delBtn = document.querySelector("#del");--%>
+    <%--delBtn.addEventListener("click",e=>{--%>
+    <%--    let queryString = aidCheckboxList.filter(c=>c.checked).map(c=>"id="+c.value).join("&")--%>
+    <%--    if (confirm("是否删除选中的用户？")){--%>
+    <%--        location.href=BASE_PATH+"/complaint/delectComplaint?"+queryString;--%>
+    <%--    }--%>
+    <%--})--%>
 
     layui.use(['laydate','element','laypage','layer'], function(){
         $ = layui.jquery;//jquery

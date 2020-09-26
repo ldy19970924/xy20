@@ -56,12 +56,12 @@ public class Product implements Serializable {
     /**
      * 农户编号
      */
-    private Integer sid;
+    private Integer storeid;
 
     /**
      * 商品审核状态（0未审核、1审核中、2审核通过）
      */
-    private Integer pstate;
+    private Integer productstate;
 
     /**
      * 文字描述
@@ -71,6 +71,6 @@ public class Product implements Serializable {
     /**
      * 商品类别编号
      */
-    private Integer cateid;
+    private Integer categoryid;
 
 }
